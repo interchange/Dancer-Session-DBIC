@@ -1,5 +1,11 @@
 Revision history for Dancer::Session::DBI
 
+0.003 Sat Jul  5 12:52:17 2014 CEST
+
+     [BUG FIXES]
+
+     * Fix prototype mismatch (GH #1, GH #2).
+
 0.002 Sun Dec 29 08:30:40 2013 CET
 
     * First official release to CPAN.

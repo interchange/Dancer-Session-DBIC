@@ -55,7 +55,7 @@ This session engine will not automagically remove expired sessions on the server
 use strict;
 use parent 'Dancer::Session::Abstract';
 
-use Dancer qw(:syntax);
+use Dancer qw(:syntax !load);
 use DBIx::Class;
 use Try::Tiny;
 use Module::Load;

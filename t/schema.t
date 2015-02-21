@@ -1,6 +1,7 @@
 use strict;
 use warnings;
 
+use utf8;
 use Test::More tests => 8;
 
 use Dancer::Session::DBIC;
@@ -53,4 +54,12 @@ sub test_session_schema {
 
     ok(! defined($ret), 'Testing session destruction')
         || diag "Return value: ", $ret;
+
+    # testing with utf8 character
+    session camel => 'ラクダ';
+
+    my $camel = session('camel');
+
+    ok ($camel eq 'ラクダ', 'Testing utf-8 characters in the session.')
+        || diag "Return values: ", $camel;
 }

@@ -2,7 +2,7 @@ use strict;
 use warnings;
 
 use utf8;
-use Test::More tests => 8;
+use Test::More;
 
 use Dancer::Session::DBIC;
 use Dancer qw(:syntax :tests);
@@ -63,3 +63,5 @@ sub test_session_schema {
     ok ($camel eq 'ラクダ', 'Testing utf-8 characters in the session.')
         || diag "Return values: ", $camel;
 }
+
+done_testing;

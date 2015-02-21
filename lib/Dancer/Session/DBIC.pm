@@ -255,7 +255,7 @@ sub _deserialize {
     }
 
     # This is the Dancer function, not from JSON.pm
-    return from_json($json);
+    return from_json($json, { utf8 => 0});
 }
 
 =head1 SEE ALSO

@@ -3,6 +3,7 @@ use warnings;
 
 use utf8;
 use Test::More;
+use Test::Exception;
 
 use Dancer::Session::DBIC;
 use Dancer qw(:syntax :tests);
@@ -11,6 +12,7 @@ use File::Spec;
 use lib File::Spec->catdir( 't', 'lib' );
 
 use DBICx::TestDatabase;
+use Test::WibbleObject;
 
 test_session_schema('Test::Schema');
 test_session_schema('Test::Custom', {resultset => 'Custom',
@@ -62,6 +64,21 @@ sub test_session_schema {
 
     ok ($camel eq 'ラクダ', 'Testing utf-8 characters in the session.')
         || diag "Return values: ", $camel;
+
+
+    # to_json allows objects
+    my ( $wibble, $data );
+
+    lives_ok( sub { $wibble = Test::WibbleObject->new() },
+        "create Test::WibbleObject" );
+    isa_ok( $wibble, "Test::WibbleObject" );
+    lives_ok( sub { $wibble->name("Foo")}, "wibble name set to Foo" );
+
+    lives_ok( sub { session wibble => $wibble }, "put wibble in session" );
+
+    lives_ok( sub { $data = session('wibble') }, "get wibble out of session" );
+
+    is_deeply( $data, { name => "Foo" }, "returned data is good" );
 }
 
 done_testing;

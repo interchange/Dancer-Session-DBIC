@@ -27,6 +27,7 @@ my %WriteMakefileArgs = (
     "Scalar::Util" => 0,
   },
   "TEST_REQUIRES" => {
+    "Test::Exception" => 0,
     "Test::More" => "0.63",
     "DBICx::TestDatabase" => 0,
     "DBIx::Class::TimeStamp" => 0,

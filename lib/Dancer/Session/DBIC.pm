@@ -241,7 +241,7 @@ sub _serialize {
 
     # A session is by definition ephemeral - Store it compactly
     # This is the Dancer function, not from JSON.pm
-    return to_json({%$self}, { pretty => 0 });
+    return to_json({%$self}, { pretty => 0, convert_blessed => 1 });
 }
 
 

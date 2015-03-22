@@ -1,5 +1,18 @@
 Revision history for Dancer::Session::DBI
 
+0.005 Sun Mar 22 07:10:38 2015 CET
+
+     [ENHANCEMENTS]
+
+     * Use Dancer::Plugin::DBIC to provide schema if 'schema' is passed
+       in the options as a string (Yanick Champoux, GH #6).
+     * Pass convert_blessed => 1 to to_json in order to allow objects inside
+       sessions (Peter Mottram, GH #5).
+
+     [DOCUMENTATION]
+
+     * Add example for Session result class (Yanick Champoux, GH #7).
+
 0.004 Sun Feb 22 10:15:27 2015 CET
 
      [BUG FIXES]

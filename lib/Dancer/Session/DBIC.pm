@@ -32,7 +32,13 @@ Example configuration:
       data_column: "my_session_data" # defaults to session_data
 
 In conjunction with L<Dancer::Plugin::DBIC>, you can simply use the schema
-object provided by this plugin in your application:
+object provided by this plugin in your application, either by 
+providing the name of the schema used by the plugin in the config:
+
+    session_options:
+        schema: default
+
+Or by passing the schema object directly in the code:
 
     set session_options => {schema => schema};
 
@@ -170,12 +176,17 @@ sub _dbic {
     my $settings = setting('session_options');
 
     # Prefer an active schema over a schema class.
-    if (defined $settings->{schema}) {
-        if (blessed $settings->{schema}) {
-            $handle->{schema} = $settings->{schema};
+    if ( my $schema = $settings->{schema}) {
+        if (blessed $schema) {
+            $handle->{schema} = $schema;
+        }
+        elsif( ref $schema ) {
+            $handle->{schema} = $schema->();
         }
         else {
-            $handle->{schema} = $settings->{schema}->();
+            die "can't use named schema: Dancer::Plugin::DBIC not loaded\n"
+                unless $Dancer::Plugin::DBIC::VERSION;
+            $handle->{schema} = Dancer::Plugin::DBIC::schema($schema);
         }
     }
     elsif (! defined $settings->{schema_class}) {

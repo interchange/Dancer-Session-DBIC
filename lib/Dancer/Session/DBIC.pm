@@ -56,6 +56,42 @@ A timestamp field that updates when a session is updated is recommended, so you 
 
 This session engine will not automagically remove expired sessions on the server, but with a timestamp field as above, you should be able to to do this manually.
 
+=head1 RESULT CLASS EXAMPLE
+
+This result class would work as-is with the default values of C<session_options>.
+It uses L<DBIx::Class::TimeStamp> to auto-set the C<created>
+and C<last_modified> timestamps.
+
+    package MySchema::Result::Session;
+
+    use strict;
+    use warnings;
+
+    use base 'DBIx::Class::Core';
+
+    __PACKAGE__->load_components(qw(TimeStamp));
+
+    __PACKAGE__->table('sessions');
+
+    __PACKAGE__->add_columns(
+        sessions_id => { 
+            data_type => 'varchar', size => 255 
+        },
+        session_data => {
+            data_type => 'text'
+        },
+        created => { 
+            data_type => 'datetime', set_on_create => 1
+        },
+        last_modified => {
+            data_type => 'datetime', set_on_create => 1, set_on_update => 1 
+        },
+    );
+
+    __PACKAGE__->set_primary_key('sessions_id');
+
+    1;
+
 =cut
 
 use strict;

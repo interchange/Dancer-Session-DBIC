@@ -32,7 +32,7 @@ Example configuration:
       data_column: "my_session_data" # defaults to session_data
 
 In conjunction with L<Dancer::Plugin::DBIC>, you can simply use the schema
-object provided by this plugin in your application, either by 
+object provided by this plugin in your application, either by
 providing the name of the schema used by the plugin in the config:
 
     session_options:
@@ -74,17 +74,17 @@ and C<last_modified> timestamps.
     __PACKAGE__->table('sessions');
 
     __PACKAGE__->add_columns(
-        sessions_id => { 
-            data_type => 'varchar', size => 255 
+        sessions_id => {
+            data_type => 'varchar', size => 255
         },
         session_data => {
             data_type => 'text'
         },
-        created => { 
+        created => {
             data_type => 'datetime', set_on_create => 1
         },
         last_modified => {
-            data_type => 'datetime', set_on_create => 1, set_on_update => 1 
+            data_type => 'datetime', set_on_create => 1, set_on_update => 1
         },
     );
 
@@ -317,6 +317,11 @@ Stefan Hornburg (Racke) <racke@linuxia.de>
 
 Based on code from L<Dancer::Session::DBI> written by James Aitken
 and code from L<Dancer::Plugin::DBIC> written by Naveed Massjouni.
+
+Enhancements provided by:
+
+Yanick Champoux (GH #6, #7).
+Peter Mottram (GH #5).
 
 =head1 COPYRIGHT AND LICENSE
 

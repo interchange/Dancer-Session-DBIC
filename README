@@ -1,10 +1,13 @@
 NAME
+
     Dancer::Session::DBIC - DBIx::Class session engine for Dancer
 
 VERSION
-    0.005
+
+    0.006
 
 DESCRIPTION
+
     This module implements a session engine for Dancer by serializing the
     session, and storing it in a database via DBIx::Class. The default
     serialization method is JSON, though one can specify any serialization
@@ -14,6 +17,7 @@ DESCRIPTION
     terse, and portable.
 
 SYNOPSIS
+
     Example configuration:
 
         session: "DBIC"
@@ -46,29 +50,32 @@ SYNOPSIS
         };
 
 SESSION EXPIRATION
-    A timestamp field that updates when a session is updated is recommended,
-    so you can expire sessions server-side as well as client-side.
+
+    A timestamp field that updates when a session is updated is
+    recommended, so you can expire sessions server-side as well as
+    client-side.
 
     This session engine will not automagically remove expired sessions on
     the server, but with a timestamp field as above, you should be able to
     to do this manually.
 
 RESULT CLASS EXAMPLE
+
     This result class would work as-is with the default values of
-    `session_options'. It uses DBIx::Class::TimeStamp to auto-set the
-    `created' and `last_modified' timestamps.
+    session_options. It uses DBIx::Class::TimeStamp to auto-set the created
+    and last_modified timestamps.
 
         package MySchema::Result::Session;
-
+    
         use strict;
         use warnings;
-
+    
         use base 'DBIx::Class::Core';
-
+    
         __PACKAGE__->load_components(qw(TimeStamp));
-
+    
         __PACKAGE__->table('sessions');
-
+    
         __PACKAGE__->add_columns(
             sessions_id => {
                 data_type => 'varchar', size => 255
@@ -83,42 +90,51 @@ RESULT CLASS EXAMPLE
                 data_type => 'datetime', set_on_create => 1, set_on_update => 1
             },
         );
-
+    
         __PACKAGE__->set_primary_key('sessions_id');
-
+    
         1;
 
 METHODS
-  create()
+
+ create()
+
     Creates a new session. Returns the session object.
 
-  flush()
+ flush()
+
     Write the session to the database. Returns the session object.
 
-  retrieve($id)
+ retrieve($id)
+
     Look for a session with the given id.
 
-    Returns the session object if found, `undef' if not. Logs a debug-level
+    Returns the session object if found, undef if not. Logs a debug-level
     warning if the session was found, but could not be deserialized.
 
-  destroy()
+ destroy()
+
     Remove the current session object from the database.
 
 SEE ALSO
+
     Dancer, Dancer::Session
 
 AUTHOR
+
     Stefan Hornburg (Racke) <racke@linuxia.de>
 
 ACKNOWLEDGEMENTS
-    Based on code from Dancer::Session::DBI written by James Aitken and code
-    from Dancer::Plugin::DBIC written by Naveed Massjouni.
+
+    Based on code from Dancer::Session::DBI written by James Aitken and
+    code from Dancer::Plugin::DBIC written by Naveed Massjouni.
 
     Enhancements provided by:
 
-    Yanick Champoux (GH #6, #7). Peter Mottram (GH #5).
+    Yanick Champoux (GH #6, #7). Peter Mottram (GH #5, #8).
 
 COPYRIGHT AND LICENSE
+
     This software is copyright (c) Stefan Hornburg.
 
     This is free software; you can redistribute it and/or modify it under

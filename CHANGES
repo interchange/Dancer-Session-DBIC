@@ -1,5 +1,14 @@
 Revision history for Dancer::Session::DBI
 
+0.006 Wed Mar  9 17:59:59 2016 CET
+
+     German Perl Workshop 2016 release.
+
+     [BUG FIXES]
+
+     * Use data_column from configuration as accessor in retrieve method
+       (Peter Mottram, GH #8).
+
 0.005 Sun Mar 22 07:10:38 2015 CET
 
      [ENHANCEMENTS]

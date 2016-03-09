@@ -323,7 +323,7 @@ and code from L<Dancer::Plugin::DBIC> written by Naveed Massjouni.
 Enhancements provided by:
 
 Yanick Champoux (GH #6, #7).
-Peter Mottram (GH #5).
+Peter Mottram (GH #5, #8).
 
 =head1 COPYRIGHT AND LICENSE
 

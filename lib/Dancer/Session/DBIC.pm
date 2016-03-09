@@ -6,7 +6,7 @@ Dancer::Session::DBIC - DBIx::Class session engine for Dancer
 
 =head1 VERSION
 
-0.005
+0.006
 
 =head1 DESCRIPTION
 
@@ -103,7 +103,7 @@ use Try::Tiny;
 use Module::Load;
 use Scalar::Util qw(blessed);
 
-our $VERSION = '0.005';
+our $VERSION = '0.006';
 
 my %dbic_handles;
 

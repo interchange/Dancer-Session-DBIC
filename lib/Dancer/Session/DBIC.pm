@@ -151,6 +151,8 @@ if the session was found, but could not be deserialized.
 sub retrieve {
     my ($self, $session_id) = @_;
     my $session_object;
+    my $handle = $self->_dbic;
+    my $data_column = $handle->{data_column};
 
     $session_object = $self->_rset->find($session_id);
 
@@ -160,7 +162,7 @@ sub retrieve {
         return;
     }
 
-    my $session_data = $session_object->session_data;
+    my $session_data = $session_object->$data_column;
 
     # No way to check that it's valid JSON other than trying to deserialize it
     my $session = try {
